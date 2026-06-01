@@ -1,1753 +1,1831 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Koçak Koltuk — Çünkü, Sen Değerlisin</title>
-  <meta name="description" content="İnegöl'ün köklü mobilya ustası. Benzersiz tasarımlar, sanatsal dokunuşlar. Bursa / İnegöl." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <meta name="description" content="İnegöl'ün köklü mobilya markası. Benzersiz tasarımlar, sanatsal dokunuşlar. Bursa / İnegöl."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 
   <style>
-    /* ─── TOKENS ──────────────────────────────────── */
-    :root {
-      --black:   #080807;
-      --dark:    #0F0F0E;
-      --surface: #161614;
-      --card:    #1C1B19;
-      --border:  #2A2825;
-      --gold:    #C9A96E;
-      --gold-lt: #E2C99A;
-      --gold-dk: #8B6A34;
-      --cream:   #F5F0E8;
-      --muted:   #8A8478;
-      --ff-head: 'Playfair Display', Georgia, serif;
-      --ff-sub:  'Cormorant Garamond', Georgia, serif;
-      --ff-body: 'Inter', system-ui, sans-serif;
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-in-expo:  cubic-bezier(0.7, 0, 0.84, 0);
-    }
+  /* ═══════════════════════════════════════════════
+     TOKENS
+  ═══════════════════════════════════════════════ */
+  :root {
+    --ink:    #07060A;
+    --deep:   #0D0C10;
+    --surface:#141318;
+    --card:   #1A1920;
+    --border: #252330;
+    --gold:   #C8A96A;
+    --gold2:  #E8D09A;
+    --gold3:  #8A6B30;
+    --cream:  #F0EBE1;
+    --muted:  #7A7486;
+    --ff1: 'Playfair Display', Georgia, serif;
+    --ff2: 'Cormorant Garamond', Georgia, serif;
+    --ff3: 'Inter', system-ui, sans-serif;
+    --expo: cubic-bezier(0.16,1,0.3,1);
+    --circ: cubic-bezier(0.4,0,0.2,1);
+  }
 
-    /* ─── RESET ───────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: var(--ff-body);
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  /* ═══════════════════════════════════════════════
+     BASE
+  ═══════════════════════════════════════════════ */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--ff3);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+    cursor:none;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media(hover:none){body{cursor:auto}}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:none;border:none;background:none}
+  ::selection{background:var(--gold3);color:var(--cream)}
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-track{background:var(--ink)}
+  ::-webkit-scrollbar-thumb{background:var(--gold3)}
 
-    /* ─── SCROLLBAR ───────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+  /* ═══════════════════════════════════════════════
+     CURSOR
+  ═══════════════════════════════════════════════ */
+  #cursor{
+    position:fixed;
+    top:0;left:0;
+    width:10px;height:10px;
+    background:var(--gold);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .3s var(--expo), height .3s var(--expo), background .3s ease, opacity .3s ease;
+    mix-blend-mode:difference;
+  }
+  #cursor-ring{
+    position:fixed;
+    top:0;left:0;
+    width:36px;height:36px;
+    border:1px solid rgba(200,169,106,0.5);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:width .5s var(--expo), height .5s var(--expo), border-color .3s ease;
+  }
+  body.cursor-hover #cursor{width:48px;height:48px;opacity:.15}
+  body.cursor-hover #cursor-ring{width:64px;height:64px;border-color:var(--gold)}
+  @media(hover:none){#cursor,#cursor-ring{display:none}}
 
-    /* ─── SELECTION ───────────────────────────────── */
-    ::selection { background: var(--gold-dk); color: var(--cream); }
+  /* ═══════════════════════════════════════════════
+     LOADER
+  ═══════════════════════════════════════════════ */
+  #loader{
+    position:fixed;inset:0;
+    z-index:1000;
+    background:var(--ink);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2rem;
+    transition:opacity .8s var(--expo),visibility .8s;
+  }
+  #loader.out{opacity:0;visibility:hidden;pointer-events:none}
+  .loader-wordmark{
+    font-family:var(--ff1);
+    font-size:clamp(1.75rem,4vw,2.5rem);
+    font-weight:500;
+    letter-spacing:.06em;
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .loader-wordmark span{
+    display:inline-block;
+    color:var(--gold);
+  }
+  .loader-line-wrap{
+    width:200px;
+    height:1px;
+    background:var(--border);
+    overflow:hidden;
+  }
+  .loader-line-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+    animation:fill 1.6s var(--expo) forwards;
+  }
+  @keyframes fill{to{width:100%}}
+  .loader-counter{
+    font-size:.75rem;
+    letter-spacing:.3em;
+    color:var(--muted);
+    font-variant-numeric:tabular-nums;
+  }
 
-    /* ─── NAV ─────────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 1.25rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 3rem);
-      max-width: 1320px;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(201, 169, 110, 0.12);
-      background: rgba(8, 8, 7, 0.6);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      transition: all 400ms var(--ease-out-expo);
-    }
-    .nav.scrolled {
-      background: rgba(8, 8, 7, 0.92);
-      border-color: rgba(201, 169, 110, 0.2);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-    }
-    .nav-logo {
-      font-family: var(--ff-head);
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--cream);
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.8125rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 250ms ease;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-cta {
-      padding: 0.625rem 1.5rem;
-      border: 1px solid rgba(201, 169, 110, 0.4);
-      border-radius: 0.375rem;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      transition: all 250ms ease;
-    }
-    .nav-cta:hover {
-      background: var(--gold);
-      color: var(--black);
-      border-color: var(--gold);
-    }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      width: 22px;
-      height: 1.5px;
-      background: var(--cream);
-      transition: all 300ms ease;
-      display: block;
-    }
+  /* ═══════════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════════ */
+  nav{
+    position:fixed;
+    top:1.5rem;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(calc(100% - 2.5rem), 1400px);
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:.875rem 2rem;
+    border-radius:.625rem;
+    border:1px solid rgba(200,169,106,.1);
+    background:rgba(7,6,10,.55);
+    backdrop-filter:blur(24px) saturate(1.6);
+    -webkit-backdrop-filter:blur(24px) saturate(1.6);
+    transition:all .4s var(--expo);
+  }
+  nav.solid{
+    background:rgba(7,6,10,.92);
+    border-color:rgba(200,169,106,.18);
+    box-shadow:0 12px 48px rgba(0,0,0,.6);
+  }
+  .nav-logo{
+    font-family:var(--ff1);
+    font-size:1.1875rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .nav-logo img{
+    height:28px;
+    width:auto;
+    filter:brightness(0) invert(1);
+    opacity:.9;
+  }
+  .nav-links{
+    display:flex;
+    gap:2.75rem;
+    list-style:none;
+  }
+  .nav-links a{
+    font-size:.75rem;
+    font-weight:400;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .nav-right{display:flex;align-items:center;gap:1.5rem}
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:.625rem;
+    padding:.625rem 1.5rem;
+    border:1px solid rgba(200,169,106,.35);
+    border-radius:.375rem;
+    font-size:.75rem;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    transition:all .25s ease;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .nav-burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+  }
+  .nav-burger span{
+    width:22px;
+    height:1px;
+    background:var(--cream);
+    display:block;
+    transition:all .3s ease;
+  }
+  .nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-burger.open span:nth-child(2){opacity:0}
+  .nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-    /* ─── MOBILE NAV ──────────────────────────────── */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 40;
-      background: rgba(8,8,7,0.98);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--ff-head);
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--cream);
-      letter-spacing: 0.04em;
-      transition: color 200ms ease;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      font-size: 1.5rem;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 8px;
-    }
+  /* ═══════════════════════════════════════════════
+     MOBILE MENU
+  ═══════════════════════════════════════════════ */
+  #mobileMenu{
+    display:none;
+    position:fixed;inset:0;
+    z-index:90;
+    background:rgba(7,6,10,.97);
+    backdrop-filter:blur(20px);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2.5rem;
+  }
+  #mobileMenu.open{display:flex}
+  #mobileMenu a{
+    font-family:var(--ff1);
+    font-size:2.25rem;
+    font-weight:400;
+    color:var(--cream);
+    transition:color .2s;
+  }
+  #mobileMenu a:hover{color:var(--gold)}
 
-    /* ─── HERO ────────────────────────────────────── */
-    .hero {
-      position: relative;
-      height: 100dvh;
-      min-height: 600px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(139, 106, 52, 0.18) 0%, transparent 60%),
-        linear-gradient(135deg, #0A0908 0%, #161412 50%, #0A0908 100%);
-    }
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-    }
-    .hero-orb-1 {
-      width: 600px; height: 600px;
-      top: -100px; right: -100px;
-      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
-      animation: orb-drift 12s ease-in-out infinite alternate;
-    }
-    .hero-orb-2 {
-      width: 400px; height: 400px;
-      bottom: 10%; left: 5%;
-      background: radial-gradient(circle, rgba(139,106,52,0.1) 0%, transparent 70%);
-      animation: orb-drift 16s ease-in-out infinite alternate-reverse;
-    }
-    @keyframes orb-drift {
-      from { transform: translate(0, 0) scale(1); }
-      to   { transform: translate(40px, 30px) scale(1.1); }
-    }
+  /* ═══════════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════════ */
+  .hero{
+    position:relative;
+    height:100dvh;
+    min-height:640px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:end;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 80% at 70% 30%, rgba(138,107,48,.22) 0%, transparent 55%),
+      linear-gradient(160deg, #0A090E 0%, #10101A 60%, #07060A 100%);
+  }
+  .hero-noise{
+    position:absolute;inset:0;
+    opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  .hero-left{
+    position:relative;
+    z-index:2;
+    padding:0 4rem 8rem 5vw;
+    padding-left:max(3rem, 5vw);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    height:100%;
+  }
+  .hero-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    margin-bottom:2rem;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeup .8s var(--expo) .3s forwards;
+  }
+  .hero-eyebrow-line{width:40px;height:1px;background:var(--gold)}
+  .hero-eyebrow-text{
+    font-size:.6875rem;
+    font-weight:500;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .hero-h1{
+    font-family:var(--ff1);
+    font-size:clamp(3.25rem, 6.5vw, 7.5rem);
+    font-weight:400;
+    line-height:.95;
+    letter-spacing:-.025em;
+    color:var(--cream);
+    margin-bottom:2rem;
+  }
+  .hero-h1 .line{
+    display:block;
+    overflow:hidden;
+  }
+  .hero-h1 .line span{
+    display:block;
+    opacity:0;
+    transform:translateY(100%);
+    animation:slideup .9s var(--expo) forwards;
+  }
+  .hero-h1 .line:nth-child(1) span{animation-delay:.4s}
+  .hero-h1 .line:nth-child(2) span{animation-delay:.52s}
+  .hero-h1 .line:nth-child(3) span{animation-delay:.64s}
+  .hero-h1 em{font-style:italic;color:var(--gold)}
+  .hero-sub{
+    font-family:var(--ff2);
+    font-size:clamp(1rem, 1.5vw, 1.25rem);
+    font-style:italic;
+    font-weight:300;
+    color:var(--muted);
+    max-width:400px;
+    line-height:1.8;
+    margin-bottom:3rem;
+    opacity:0;
+    animation:fadeup .8s var(--expo) .8s forwards;
+  }
+  .hero-actions{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:fadeup .8s var(--expo) 1s forwards;
+  }
+  @keyframes fadeup{to{opacity:1;transform:none}}
+  @keyframes slideup{to{opacity:1;transform:none}}
 
-    /* Decorative furniture silhouette lines */
-    .hero-lines {
-      position: absolute;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 380px;
-      height: 380px;
-      opacity: 0.06;
-    }
+  .btn-gold{
+    display:inline-flex;
+    align-items:center;
+    gap:.75rem;
+    padding:1rem 2.25rem;
+    background:var(--gold);
+    color:var(--ink);
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    border-radius:.375rem;
+    transition:all .35s var(--expo);
+    position:relative;
+    overflow:hidden;
+  }
+  .btn-gold::after{
+    content:'';
+    position:absolute;inset:0;
+    background:var(--gold2);
+    transform:translateX(-101%);
+    transition:transform .4s var(--expo);
+  }
+  .btn-gold:hover::after{transform:translateX(0)}
+  .btn-gold > *{position:relative;z-index:1}
+  .btn-gold svg{transition:transform .3s ease}
+  .btn-gold:hover svg{transform:translateX(5px)}
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 2rem 8rem;
-    }
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.75rem;
-    }
-    .hero-eyebrow-line {
-      width: 48px;
-      height: 1px;
-      background: var(--gold);
-    }
-    .hero-eyebrow-text {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .hero-title {
-      font-family: var(--ff-head);
-      font-size: clamp(3.5rem, 8vw, 8rem);
-      font-weight: 400;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      color: var(--cream);
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-    .hero-subtitle {
-      font-family: var(--ff-sub);
-      font-size: clamp(1.1rem, 2vw, 1.375rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 3rem;
-      line-height: 1.7;
-    }
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 2.5rem;
-      background: var(--gold);
-      color: var(--black);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border-radius: 0.375rem;
-      transition: all 300ms var(--ease-out-expo);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gold-lt);
-      transform: translateX(-101%);
-      transition: transform 400ms var(--ease-out-expo);
-    }
-    .btn-primary:hover::before { transform: translateX(0); }
-    .btn-primary span { position: relative; z-index: 1; }
-    .btn-primary svg { position: relative; z-index: 1; transition: transform 300ms ease; }
-    .btn-primary:hover svg { transform: translateX(4px); }
+  .btn-text{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    font-size:.75rem;
+    font-weight:400;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    transition:color .25s ease;
+  }
+  .btn-text:hover{color:var(--cream)}
+  .btn-text svg{transition:transform .3s ease}
+  .btn-text:hover svg{transform:translateX(4px)}
 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8125rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 250ms ease;
-    }
-    .btn-ghost:hover { color: var(--cream); }
-    .btn-ghost svg { transition: transform 300ms ease; }
-    .btn-ghost:hover svg { transform: translateX(4px); }
+  .hero-right{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom:3rem;
+    overflow:hidden;
+  }
+  .hero-product-img{
+    width:82%;
+    max-width:640px;
+    object-fit:contain;
+    opacity:0;
+    transform:translateY(30px) scale(.97);
+    animation:heroimg 1.2s var(--expo) .6s forwards;
+    filter:drop-shadow(0 40px 80px rgba(0,0,0,.7));
+  }
+  @keyframes heroimg{
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  .hero-product-glow{
+    position:absolute;
+    bottom:0;left:50%;
+    transform:translateX(-50%);
+    width:70%;
+    height:200px;
+    background:radial-gradient(ellipse, rgba(200,169,106,.18) 0%, transparent 70%);
+    pointer-events:none;
+  }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      right: 3rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hero-scroll-text {
-      font-size: 0.6875rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      writing-mode: vertical-rl;
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scroll-pulse 2s ease-in-out infinite;
-    }
-    @keyframes scroll-pulse {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50%       { opacity: 1;   transform: scaleY(0.6); }
-    }
+  .hero-scroll-hint{
+    position:absolute;
+    bottom:2.5rem;left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.75rem;
+    opacity:0;
+    animation:fadeup .8s var(--expo) 1.4s forwards;
+  }
+  .hero-scroll-hint-text{
+    font-size:.625rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .scroll-track{
+    width:1px;
+    height:50px;
+    background:var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-fill{
+    position:absolute;top:0;
+    width:100%;
+    background:linear-gradient(to bottom,var(--gold),transparent);
+    height:30px;
+    animation:scrolldown 2s ease-in-out infinite;
+  }
+  @keyframes scrolldown{
+    0%{top:-30px;opacity:1}
+    70%{opacity:1}
+    100%{top:50px;opacity:0}
+  }
 
-    .hero-stats {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 4rem;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat-num {
-      font-family: var(--ff-head);
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: 0.6875rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.375rem;
-    }
+  .hero-stats{
+    position:absolute;
+    bottom:2.5rem;
+    right:5vw;
+    display:flex;
+    gap:3rem;
+    opacity:0;
+    animation:fadeup .8s var(--expo) 1.2s forwards;
+  }
+  .hero-stat-n{
+    font-family:var(--ff1);
+    font-size:2rem;
+    font-weight:600;
+    color:var(--gold);
+    line-height:1;
+  }
+  .hero-stat-l{
+    font-size:.625rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:.375rem;
+  }
 
-    /* ─── SECTION BASE ────────────────────────────── */
-    section { position: relative; }
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.875rem;
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-    }
-    .section-label::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--gold);
-      display: block;
-    }
-    .section-title {
-      font-family: var(--ff-head);
-      font-size: clamp(2.25rem, 5vw, 4rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--cream);
-    }
-    .section-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-    .section-desc {
-      font-family: var(--ff-sub);
-      font-size: 1.125rem;
-      font-style: italic;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 560px;
-    }
-    .container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+  /* ═══════════════════════════════════════════════
+     MARQUEE
+  ═══════════════════════════════════════════════ */
+  .marquee{
+    padding:1.25rem 0;
+    background:var(--surface);
+    overflow:hidden;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .marquee-t{
+    display:flex;
+    gap:3.5rem;
+    width:max-content;
+    animation:marquee 28s linear infinite;
+  }
+  .marquee:hover .marquee-t{animation-play-state:paused}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee-i{
+    display:flex;align-items:center;gap:1.25rem;
+    font-size:.6875rem;
+    font-weight:500;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .m-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-    /* ─── DIVIDER ─────────────────────────────────── */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--border) 30%, var(--border) 70%, transparent);
-    }
+  /* ═══════════════════════════════════════════════
+     SECTION HEADER
+  ═══════════════════════════════════════════════ */
+  .s-label{
+    display:inline-flex;align-items:center;gap:.875rem;
+    font-size:.6875rem;font-weight:500;
+    letter-spacing:.25em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.25rem;
+  }
+  .s-label::before{
+    content:'';display:block;
+    width:28px;height:1px;background:var(--gold);
+  }
+  .s-title{
+    font-family:var(--ff1);
+    font-size:clamp(2rem,4.5vw,3.75rem);
+    font-weight:400;
+    line-height:1.08;
+    letter-spacing:-.02em;
+    color:var(--cream);
+  }
+  .s-title em{font-style:italic;color:var(--gold)}
+  .container{max-width:1400px;margin:0 auto;padding:0 max(2rem,4vw)}
 
-    /* ─── MARQUEE STRIP ───────────────────────────── */
-    .marquee-strip {
-      padding: 1.5rem 0;
-      background: var(--surface);
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .marquee-track {
-      display: flex;
-      gap: 4rem;
-      animation: marquee 30s linear infinite;
-      width: max-content;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .marquee-dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
+  /* ═══════════════════════════════════════════════
+     COLLECTIONS — HORIZONTAL SCROLL
+  ═══════════════════════════════════════════════ */
+  .collections{
+    padding:8rem 0 0;
+    background:var(--deep);
+  }
+  .col-header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    flex-wrap:wrap;gap:2rem;
+    margin-bottom:4rem;
+  }
+  .col-scroll-wrap{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:visible;
+    scrollbar-width:none;
+    padding:0 max(2rem,4vw) 5rem;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    cursor:grab;
+  }
+  .col-scroll-wrap:active{cursor:grabbing}
+  .col-scroll-wrap::-webkit-scrollbar{display:none}
+  .col-track{
+    display:flex;
+    gap:1.5rem;
+    width:max-content;
+  }
+  .col-card{
+    width:360px;
+    flex-shrink:0;
+    scroll-snap-align:start;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:.875rem;
+    overflow:hidden;
+    transition:border-color .4s ease, transform .5s var(--expo), box-shadow .4s ease;
+  }
+  .col-card:hover{
+    border-color:rgba(200,169,106,.3);
+    transform:translateY(-8px);
+    box-shadow:0 32px 64px rgba(0,0,0,.55);
+  }
+  .col-card-img{
+    height:300px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#18171F,#1E1D26);
+    display:flex;align-items:center;justify-content:center;
+    padding:2rem;
+  }
+  .col-card-img img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    transition:transform .7s var(--expo), filter .5s ease;
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));
+  }
+  .col-card:hover .col-card-img img{
+    transform:scale(1.07) translateY(-6px);
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));
+  }
+  .col-card-body{
+    padding:1.5rem;
+    border-top:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .col-card-tag{
+    font-size:.625rem;
+    font-weight:500;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:.375rem;
+  }
+  .col-card-name{
+    font-family:var(--ff1);
+    font-size:1.125rem;
+    font-weight:500;
+    color:var(--cream);
+  }
+  .col-card-btn{
+    width:40px;height:40px;
+    border-radius:50%;
+    border:1px solid rgba(200,169,106,.25);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+    flex-shrink:0;
+    transition:all .3s ease;
+    opacity:0;
+    transform:scale(.8);
+  }
+  .col-card:hover .col-card-btn{opacity:1;transform:scale(1);background:rgba(200,169,106,.12)}
 
-    /* ─── COLLECTIONS ─────────────────────────────── */
-    .collections {
-      padding: 8rem 0;
-      background: var(--dark);
-    }
-    .collections-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .collections-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 1.5rem;
-    }
-    .col-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 0.75rem;
-      background: var(--card);
-      cursor: pointer;
-      border: 1px solid var(--border);
-      transition: border-color 400ms ease, transform 500ms var(--ease-out-expo), box-shadow 400ms ease;
-    }
-    .col-card:hover {
-      border-color: rgba(201,169,110,0.3);
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    }
-    .col-card-1 { grid-column: span 7; }
-    .col-card-2 { grid-column: span 5; }
-    .col-card-3 { grid-column: span 4; }
-    .col-card-4 { grid-column: span 4; }
-    .col-card-5 { grid-column: span 4; }
+  .col-drag-hint{
+    display:flex;align-items:center;gap:.875rem;
+    font-size:.6875rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .col-drag-hint svg{color:var(--gold)}
 
-    .col-card-img {
-      width: 100%;
-      aspect-ratio: auto;
-      overflow: hidden;
-    }
-    .col-card-1 .col-card-img { height: 420px; }
-    .col-card-2 .col-card-img { height: 420px; }
-    .col-card-3 .col-card-img,
-    .col-card-4 .col-card-img,
-    .col-card-5 .col-card-img { height: 280px; }
+  /* ═══════════════════════════════════════════════
+     DINING & TV — GRID SHOWCASE
+  ═══════════════════════════════════════════════ */
+  .showcase{padding:7rem 0;background:var(--ink)}
+  .showcase-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    margin-top:4rem;
+  }
+  .sc-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:.875rem;
+    overflow:hidden;
+    transition:border-color .4s ease, transform .5s var(--expo), box-shadow .4s ease;
+  }
+  .sc-card:hover{
+    border-color:rgba(200,169,106,.3);
+    transform:translateY(-6px);
+    box-shadow:0 24px 56px rgba(0,0,0,.5);
+  }
+  .sc-card-img{
+    height:260px;
+    background:linear-gradient(135deg,#18171F,#1E1D26);
+    display:flex;align-items:center;justify-content:center;
+    padding:2rem;
+    overflow:hidden;
+  }
+  .sc-card-img img{
+    max-width:100%;max-height:100%;
+    object-fit:contain;
+    transition:transform .7s var(--expo), filter .5s ease;
+    filter:drop-shadow(0 16px 32px rgba(0,0,0,.5));
+  }
+  .sc-card:hover .sc-card-img img{
+    transform:scale(1.06) translateY(-4px);
+    filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));
+  }
+  .sc-card-body{
+    padding:1.25rem 1.5rem;
+    border-top:1px solid var(--border);
+  }
+  .sc-card-cat{
+    font-size:.625rem;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:.3rem;
+  }
+  .sc-card-name{
+    font-family:var(--ff1);
+    font-size:1rem;font-weight:500;
+    color:var(--cream);
+  }
 
-    .col-card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 700ms var(--ease-out-expo), filter 600ms ease;
-      filter: brightness(0.85) saturate(0.9);
-    }
-    .col-card:hover .col-card-img img {
-      transform: scale(1.06);
-      filter: brightness(0.95) saturate(1);
-    }
-    .col-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(8,8,7,0.85) 0%, rgba(8,8,7,0.2) 50%, transparent 100%);
-    }
-    .col-card-body {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .col-card-tag {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-    .col-card-name {
-      font-family: var(--ff-head);
-      font-size: 1.375rem;
-      font-weight: 500;
-      color: var(--cream);
-      line-height: 1.2;
-    }
-    .col-card-arrow {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      flex-shrink: 0;
-      transition: all 300ms ease;
-      transform: translateY(8px);
-      opacity: 0;
-    }
-    .col-card:hover .col-card-arrow {
-      transform: translateY(0);
-      opacity: 1;
-      background: rgba(201,169,110,0.12);
-    }
+  /* ═══════════════════════════════════════════════
+     ABOUT / CRAFT
+  ═══════════════════════════════════════════════ */
+  .about{
+    padding:8rem 0;
+    background:var(--deep);
+    overflow:hidden;
+  }
+  .about-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6rem;
+    align-items:center;
+  }
+  .about-visual{position:relative}
+  .about-main-img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border-radius:1rem;
+    filter:brightness(.85) saturate(.85);
+  }
+  .about-accent-img{
+    position:absolute;
+    bottom:-3.5rem;right:-3.5rem;
+    width:52%;
+    aspect-ratio:1;
+    object-fit:cover;
+    border-radius:.875rem;
+    border:4px solid var(--deep);
+    filter:brightness(.9) saturate(.8);
+  }
+  .about-badge{
+    position:absolute;
+    top:2.5rem;left:-2.5rem;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:.875rem;
+    padding:1.25rem 1.5rem;
+    display:flex;align-items:center;gap:1rem;
+    box-shadow:0 12px 32px rgba(0,0,0,.5);
+  }
+  .about-badge-icon{
+    width:42px;height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--gold3),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .about-badge-n{
+    font-family:var(--ff1);
+    font-size:1.75rem;font-weight:600;
+    color:var(--gold);line-height:1;
+  }
+  .about-badge-l{
+    font-size:.625rem;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .about-text{}
+  .about-title{
+    font-family:var(--ff1);
+    font-size:clamp(2.25rem,4vw,3.5rem);
+    font-weight:400;line-height:1.1;
+    letter-spacing:-.02em;color:var(--cream);
+    margin-bottom:1.75rem;
+  }
+  .about-title em{font-style:italic;color:var(--gold)}
+  .about-body{
+    font-family:var(--ff2);
+    font-size:1.0625rem;
+    font-style:italic;
+    font-weight:300;
+    color:var(--muted);
+    line-height:1.9;
+    margin-bottom:2.5rem;
+  }
+  .about-feats{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:1.5rem;margin-bottom:3rem;
+  }
+  .af{display:flex;gap:1rem;align-items:flex-start}
+  .af-icon{
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid rgba(200,169,106,.3);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);flex-shrink:0;margin-top:2px;
+  }
+  .af-t{font-size:.875rem;font-weight:500;color:var(--cream);margin-bottom:.25rem}
+  .af-d{font-size:.8125rem;color:var(--muted);line-height:1.6}
 
-    /* ─── CRAFTSMANSHIP / ABOUT ───────────────────── */
-    .craft {
-      padding: 8rem 0;
-      background: var(--black);
-      overflow: hidden;
-    }
-    .craft-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .craft-visual {
-      position: relative;
-    }
-    .craft-img-main {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border-radius: 1rem;
-      filter: brightness(0.88) saturate(0.85);
-    }
-    .craft-img-accent {
-      position: absolute;
-      bottom: -3rem;
-      right: -3rem;
-      width: 55%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 0.75rem;
-      border: 4px solid var(--black);
-      filter: brightness(0.9) saturate(0.85);
-    }
-    .craft-badge {
-      position: absolute;
-      top: 2rem;
-      left: -2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .craft-badge-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-dk), var(--gold));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .craft-badge-num {
-      font-family: var(--ff-head);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .craft-badge-label {
-      font-size: 0.6875rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .craft-text { }
-    .craft-title {
-      font-family: var(--ff-head);
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--cream);
-      margin-bottom: 1.75rem;
-    }
-    .craft-title em { font-style: italic; color: var(--gold); }
-    .craft-body {
-      font-family: var(--ff-sub);
-      font-size: 1.0625rem;
-      font-style: italic;
-      color: var(--muted);
-      line-height: 1.85;
-      margin-bottom: 2.5rem;
-    }
-    .craft-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-    .craft-feature {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .craft-feature-icon {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .craft-feature-title {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--cream);
-      margin-bottom: 0.25rem;
-    }
-    .craft-feature-desc {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+  /* ═══════════════════════════════════════════════
+     PULLQUOTE
+  ═══════════════════════════════════════════════ */
+  .pullquote{
+    padding:7rem 0;
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    text-align:center;
+  }
+  .pq-inner{max-width:880px;margin:0 auto}
+  .pq-mark{
+    font-family:var(--ff1);
+    font-size:9rem;line-height:.4;
+    color:var(--gold3);opacity:.35;
+    display:block;margin-bottom:2.5rem;
+  }
+  .pq-text{
+    font-family:var(--ff1);
+    font-size:clamp(1.5rem,3vw,2.625rem);
+    font-style:italic;font-weight:400;
+    color:var(--cream);line-height:1.45;
+    margin-bottom:3rem;
+  }
+  .pq-text em{color:var(--gold);font-style:normal}
+  .pq-rule{
+    display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  }
+  .pq-line{width:56px;height:1px;background:var(--border)}
+  .pq-auth{
+    font-size:.6875rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);
+  }
 
-    /* ─── TESTIMONIAL / QUOTE ─────────────────────── */
-    .quote-section {
-      padding: 7rem 0;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .quote-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .quote-mark {
-      font-family: var(--ff-head);
-      font-size: 8rem;
-      line-height: 0.5;
-      color: var(--gold-dk);
-      opacity: 0.4;
-      margin-bottom: 2rem;
-      display: block;
-    }
-    .quote-text {
-      font-family: var(--ff-head);
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--cream);
-      line-height: 1.45;
-      margin-bottom: 3rem;
-    }
-    .quote-text em { color: var(--gold); font-style: normal; }
-    .quote-author-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-    .quote-line { width: 48px; height: 1px; background: var(--border); }
-    .quote-author { font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  /* ═══════════════════════════════════════════════
+     CONTACT
+  ═══════════════════════════════════════════════ */
+  .contact{padding:8rem 0;background:var(--deep)}
+  .contact-inner{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:6rem;align-items:start;
+  }
+  .c-detail{
+    display:flex;gap:1.25rem;align-items:flex-start;
+    padding:1.5rem 0;
+    border-bottom:1px solid var(--border);
+  }
+  .c-detail:first-of-type{border-top:1px solid var(--border)}
+  .c-icon{
+    width:40px;height:40px;border-radius:50%;
+    border:1px solid rgba(200,169,106,.2);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);flex-shrink:0;
+  }
+  .c-label{
+    font-size:.625rem;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:.375rem;
+  }
+  .c-val{font-size:.9375rem;color:var(--cream);line-height:1.65}
+  .c-val a{transition:color .2s ease}
+  .c-val a:hover{color:var(--gold)}
+  .form-wrap{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:2.5rem;
+  }
+  .form-title{
+    font-family:var(--ff1);
+    font-size:1.5rem;font-weight:500;
+    color:var(--cream);margin-bottom:.375rem;
+  }
+  .form-sub{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+  .fg{margin-bottom:1.25rem}
+  .fl{
+    display:block;font-size:.6875rem;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:.625rem;
+  }
+  .fi,.ft{
+    width:100%;
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--border);
+    border-radius:.5rem;
+    padding:.875rem 1.125rem;
+    color:var(--cream);
+    font-family:var(--ff3);
+    font-size:.9375rem;font-weight:300;
+    outline:none;
+    transition:border-color .25s,background .25s;
+  }
+  .fi::placeholder,.ft::placeholder{color:var(--muted);opacity:.55}
+  .fi:focus,.ft:focus{
+    border-color:rgba(200,169,106,.5);
+    background:rgba(255,255,255,.05);
+  }
+  .ft{resize:vertical;min-height:130px}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .btn-submit{
+    width:100%;padding:1rem;
+    background:var(--gold);color:var(--ink);
+    font-family:var(--ff3);
+    font-size:.75rem;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;
+    border-radius:.5rem;cursor:pointer;
+    border:none;margin-top:.5rem;
+    transition:background .3s ease,transform .15s ease;
+  }
+  .btn-submit:hover{background:var(--gold2)}
+  .btn-submit:active{transform:scale(.99)}
 
-    /* ─── SHOWROOM / CONTACT ──────────────────────── */
-    .contact {
-      padding: 8rem 0;
-      background: var(--dark);
-    }
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-    .contact-info { }
-    .contact-detail {
-      display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .contact-detail:first-of-type { border-top: 1px solid var(--border); }
-    .contact-detail-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-    .contact-detail-label {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.375rem;
-    }
-    .contact-detail-value {
-      font-size: 1rem;
-      color: var(--cream);
-      line-height: 1.6;
-    }
-    .contact-form-wrap {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      padding: 2.5rem;
-    }
-    .form-title {
-      font-family: var(--ff-head);
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--cream);
-      margin-bottom: 0.5rem;
-    }
-    .form-sub {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.625rem;
-    }
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
-      padding: 0.875rem 1.125rem;
-      color: var(--cream);
-      font-family: var(--ff-body);
-      font-size: 0.9375rem;
-      font-weight: 300;
-      outline: none;
-      transition: border-color 250ms ease, background 250ms ease;
-    }
-    .form-input::placeholder,
-    .form-textarea::placeholder { color: var(--muted); opacity: 0.6; }
-    .form-input:focus,
-    .form-textarea:focus {
-      border-color: rgba(201,169,110,0.5);
-      background: rgba(255,255,255,0.06);
-    }
-    .form-textarea { resize: vertical; min-height: 130px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .btn-submit {
-      width: 100%;
-      padding: 1rem;
-      background: var(--gold);
-      color: var(--black);
-      font-family: var(--ff-body);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      border: none;
-      margin-top: 0.5rem;
-      transition: all 300ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-submit:hover { background: var(--gold-lt); }
-    .btn-submit:active { transform: scale(0.99); }
+  /* ═══════════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════════ */
+  footer{
+    background:var(--ink);
+    border-top:1px solid var(--border);
+    padding:5rem 0 2.5rem;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:4rem;margin-bottom:4rem;
+  }
+  .f-brand-name{
+    font-family:var(--ff1);
+    font-size:1.5rem;font-weight:600;
+    color:var(--cream);margin-bottom:.25rem;
+  }
+  .f-brand-name span{color:var(--gold)}
+  .f-tagline{
+    font-family:var(--ff2);
+    font-style:italic;
+    color:var(--muted);font-size:.9375rem;
+    margin-bottom:1.5rem;
+  }
+  .f-social{display:flex;gap:.75rem}
+  .f-soc{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);
+    transition:all .25s ease;
+  }
+  .f-soc:hover{border-color:rgba(200,169,106,.4);color:var(--gold);background:rgba(200,169,106,.08)}
+  .f-col-t{
+    font-size:.6875rem;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;
+    color:var(--cream);margin-bottom:1.5rem;
+  }
+  .f-links{list-style:none;display:flex;flex-direction:column;gap:.875rem}
+  .f-links a{font-size:.875rem;color:var(--muted);transition:color .2s}
+  .f-links a:hover{color:var(--gold)}
+  .f-bottom{
+    padding-top:2rem;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:1rem;
+  }
+  .f-copy{font-size:.8125rem;color:var(--muted)}
+  .f-legal{display:flex;gap:2rem}
+  .f-legal a{font-size:.8125rem;color:var(--muted);transition:color .2s}
+  .f-legal a:hover{color:var(--cream)}
 
-    /* ─── FOOTER ──────────────────────────────────── */
-    footer {
-      background: var(--black);
-      border-top: 1px solid var(--border);
-      padding: 4rem 0 2rem;
-    }
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 4rem;
-    }
-    .footer-brand-name {
-      font-family: var(--ff-head);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.25rem;
-    }
-    .footer-brand-name span { color: var(--gold); }
-    .footer-tagline {
-      font-family: var(--ff-sub);
-      font-style: italic;
-      color: var(--muted);
-      font-size: 0.9375rem;
-      margin-bottom: 1.5rem;
-    }
-    .footer-social {
-      display: flex;
-      gap: 0.75rem;
-    }
-    .footer-social-link {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      transition: all 250ms ease;
-    }
-    .footer-social-link:hover {
-      border-color: rgba(201,169,110,0.4);
-      color: var(--gold);
-      background: rgba(201,169,110,0.08);
-    }
-    .footer-col-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.875rem;
-    }
-    .footer-links a {
-      font-size: 0.875rem;
-      color: var(--muted);
-      transition: color 200ms ease;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-copy {
-      font-size: 0.8125rem;
-      color: var(--muted);
-    }
-    .footer-legal {
-      display: flex;
-      gap: 2rem;
-    }
-    .footer-legal a {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      transition: color 200ms ease;
-    }
-    .footer-legal a:hover { color: var(--cream); }
+  /* ═══════════════════════════════════════════════
+     SCROLL REVEAL
+  ═══════════════════════════════════════════════ */
+  .r{opacity:0;transform:translateY(40px);transition:opacity .85s var(--expo),transform .85s var(--expo)}
+  .rl{opacity:0;transform:translateX(-50px);transition:opacity .85s var(--expo),transform .85s var(--expo)}
+  .rr{opacity:0;transform:translateX(50px);transition:opacity .85s var(--expo),transform .85s var(--expo)}
+  .r.v,.rl.v,.rr.v{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+  .d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
-    /* ─── SCROLL REVEAL ───────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 800ms var(--ease-out-expo), transform 800ms var(--ease-out-expo);
+  /* ═══════════════════════════════════════════════
+     REDUCED MOTION
+  ═══════════════════════════════════════════════ */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-50px);
-      transition: opacity 800ms var(--ease-out-expo), transform 800ms var(--ease-out-expo);
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(50px);
-      transition: opacity 800ms var(--ease-out-expo), transform 800ms var(--ease-out-expo);
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-delay-1 { transition-delay: 100ms; }
-    .reveal-delay-2 { transition-delay: 200ms; }
-    .reveal-delay-3 { transition-delay: 300ms; }
-    .reveal-delay-4 { transition-delay: 400ms; }
-    .reveal-delay-5 { transition-delay: 500ms; }
+    .r,.rl,.rr{opacity:1 !important;transform:none !important}
+    .hero-h1 .line span,.hero-eyebrow,.hero-sub,.hero-actions,.hero-product-img,
+    .hero-scroll-hint,.hero-stats{opacity:1;transform:none}
+  }
 
-    /* ─── HERO TEXT ANIM ──────────────────────────── */
-    .char-wrap { overflow: hidden; display: inline-block; }
-    .char {
-      display: inline-block;
-      transform: translateY(110%);
-      opacity: 0;
-      animation: char-in 900ms var(--ease-out-expo) forwards;
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════════ */
+  @media(max-width:1100px){
+    .hero{grid-template-columns:1fr}
+    .hero-right{
+      position:absolute;
+      inset:0;
+      opacity:.2;
+      pointer-events:none;
     }
-    @keyframes char-in {
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* ─── PREFERS REDUCED MOTION ──────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal, .reveal-left, .reveal-right {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-    }
-
-    /* ─── GOLD LINE DIVIDER ───────────────────────── */
-    .gold-rule {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .gold-rule-line { flex: 1; height: 1px; background: var(--border); }
-    .gold-rule-diamond {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      transform: rotate(45deg);
-    }
-
-    /* ─── RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 1024px) {
-      .collections-grid { grid-template-columns: 1fr 1fr; }
-      .col-card-1, .col-card-2 { grid-column: span 1; }
-      .col-card-3, .col-card-4, .col-card-5 { grid-column: span 1; }
-      .craft-inner { grid-template-columns: 1fr; gap: 4rem; }
-      .craft-visual { max-width: 500px; }
-      .craft-img-accent { right: -1rem; bottom: -1.5rem; }
-      .craft-badge { left: 0; }
-      .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-      .hero-stats { gap: 2.5rem; }
-      .collections-grid { grid-template-columns: 1fr; }
-      .col-card-1 .col-card-img,
-      .col-card-2 .col-card-img,
-      .col-card-3 .col-card-img,
-      .col-card-4 .col-card-img,
-      .col-card-5 .col-card-img { height: 260px; }
-      .craft-features { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .hero-scroll { display: none; }
-    }
-    @media (max-width: 480px) {
-      .hero-stats { display: none; }
-      .nav { width: calc(100% - 2rem); padding: 0.875rem 1.25rem; top: 0.75rem; }
-      .collections { padding: 5rem 0; }
-      .craft { padding: 5rem 0; }
-      .contact { padding: 5rem 0; }
-      .hero-content { padding: 0 1.5rem 6rem; }
-    }
-
-    /* ─── LOADING SCREEN ──────────────────────────── */
-    #loader {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 1.5rem;
-      transition: opacity 600ms ease, visibility 600ms ease;
-    }
-    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-logo {
-      font-family: var(--ff-head);
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: var(--cream);
-      letter-spacing: 0.04em;
-    }
-    .loader-logo span { color: var(--gold); }
-    .loader-bar {
-      width: 160px;
-      height: 1px;
-      background: var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .loader-bar-fill {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      background: linear-gradient(90deg, var(--gold-dk), var(--gold));
-      animation: loader-fill 1.2s var(--ease-out-expo) forwards;
-    }
-    @keyframes loader-fill {
-      from { width: 0; }
-      to   { width: 100%; }
-    }
-
-    /* ─── IMAGE PLACEHOLDER (if images fail) ─────── */
-    .img-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .hero-left{padding-bottom:10rem;max-width:680px}
+    .hero-stats{right:2rem}
+    .about-inner{grid-template-columns:1fr;gap:4rem}
+    .about-visual{max-width:500px}
+    .about-accent-img{right:-1.5rem;bottom:-2rem}
+    .about-badge{left:0}
+    .contact-inner{grid-template-columns:1fr;gap:4rem}
+    .showcase-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    .nav-links,.nav-cta{display:none}
+    .nav-burger{display:flex}
+    .hero-stats{display:none}
+    .about-feats{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .fg-row{grid-template-columns:1fr}
+    .col-card{width:300px}
+  }
+  @media(max-width:480px){
+    nav{width:calc(100% - 1.5rem);padding:.875rem 1.25rem;top:.75rem}
+    .hero-left{padding:0 1.5rem 8rem}
+    .hero-scroll-hint{display:none}
+    .showcase-grid{grid-template-columns:1fr}
+    .pq-text{font-size:1.4rem}
+  }
   </style>
 </head>
 <body>
 
-  <!-- LOADER -->
-  <div id="loader" role="status" aria-label="Yükleniyor">
-    <div class="loader-logo">Koçak <span>Koltuk</span></div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-  </div>
+<!-- CURSOR -->
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
-  <!-- MOBILE MENU -->
-  <nav class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigasyon">
-    <button class="mobile-close" id="mobileClose" aria-label="Menüyü kapat">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M18 6 6 18M6 6l12 12"/>
-      </svg>
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="Yükleniyor">
+  <div class="loader-wordmark">Koçak <span>Koltuk</span></div>
+  <div class="loader-line-wrap"><div class="loader-line-fill"></div></div>
+  <div class="loader-counter" id="loaderPct">0%</div>
+</div>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigasyon">
+  <a href="#koleksiyonlar" onclick="closeMob()">Koleksiyonlar</a>
+  <a href="#hakkimizda"   onclick="closeMob()">Hakkımızda</a>
+  <a href="#iletisim"     onclick="closeMob()">İletişim</a>
+  <a href="#iletisim" onclick="closeMob()" style="color:var(--gold)">Teklif Al</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Ana navigasyon">
+  <a href="#" class="nav-logo" aria-label="Koçak Koltuk">
+    <img src="https://kocakkoltuk.com/wp-content/uploads/2022/09/yeni-logo.png"
+         alt="Koçak Koltuk logo" onerror="this.style.display='none'"/>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#koleksiyonlar">Koleksiyonlar</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#iletisim" class="nav-cta">Teklif Al</a>
+    <button class="nav-burger" id="burger" aria-label="Menü" aria-expanded="false">
+      <span></span><span></span><span></span>
     </button>
-    <a href="#koleksiyonlar" onclick="closeMobile()">Koleksiyonlar</a>
-    <a href="#hakkimizda"   onclick="closeMobile()">Hakkımızda</a>
-    <a href="#iletisim"     onclick="closeMobile()">İletişim</a>
-    <a href="#iletisim" onclick="closeMobile()" style="color:var(--gold);">Teklif Al</a>
-  </nav>
+  </div>
+</nav>
 
-  <!-- NAV -->
-  <header>
-    <nav class="nav" id="mainNav" role="navigation" aria-label="Ana Navigasyon">
-      <a href="#" class="nav-logo" aria-label="Koçak Koltuk Anasayfa">Koçak <span>Koltuk</span></a>
-      <ul class="nav-links" role="list">
-        <li><a href="#koleksiyonlar">Koleksiyonlar</a></li>
-        <li><a href="#hakkimizda">Hakkımızda</a></li>
-        <li><a href="#iletisim">İletişim</a></li>
-      </ul>
-      <a href="#iletisim" class="nav-cta">Teklif Al</a>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menüyü aç" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </header>
+<!-- ═══ HERO ══════════════════════════════════════ -->
+<section class="hero" aria-label="Karşılama">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-noise" aria-hidden="true"></div>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Ana görsel">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-
-    <!-- Decorative SVG -->
-    <svg class="hero-lines" aria-hidden="true" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="60" y="200" width="260" height="120" rx="8" stroke="#C9A96E" stroke-width="1.5"/>
-      <rect x="80" y="160" width="60" height="45" rx="4" stroke="#C9A96E" stroke-width="1"/>
-      <rect x="240" y="160" width="60" height="45" rx="4" stroke="#C9A96E" stroke-width="1"/>
-      <line x1="80" y1="320" x2="80" y2="360" stroke="#C9A96E" stroke-width="1.5"/>
-      <line x1="300" y1="320" x2="300" y2="360" stroke="#C9A96E" stroke-width="1.5"/>
-      <line x1="120" y1="320" x2="120" y2="345" stroke="#C9A96E" stroke-width="1"/>
-      <line x1="260" y1="320" x2="260" y2="345" stroke="#C9A96E" stroke-width="1"/>
-      <ellipse cx="190" cy="195" rx="80" ry="10" stroke="#C9A96E" stroke-width="0.75" opacity="0.5"/>
-      <path d="M140 200 Q190 160 240 200" stroke="#C9A96E" stroke-width="1" fill="none"/>
-    </svg>
-
-    <div class="hero-content">
-      <div class="hero-eyebrow reveal" data-delay="0">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">İnegöl, Bursa — Est. 1985</span>
-      </div>
-      <h1 class="hero-title">
-        <span class="char-wrap"><span class="char" style="animation-delay:.1s">Çünkü,</span></span>
-        <br/>
-        <span class="char-wrap"><span class="char" style="animation-delay:.2s">sen </span></span>
-        <span class="char-wrap"><em><span class="char" style="animation-delay:.3s">değerlisin.</span></em></span>
-      </h1>
-      <p class="hero-subtitle reveal reveal-delay-2">
-        Benzersiz tasarımlar. Sanatsal dokunuşlar. Her parça, yılların zanaatkârlık mirasıyla hayat bulur.
-      </p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="#koleksiyonlar" class="btn-primary" aria-label="Koleksiyonları incele">
-          <span>Koleksiyonları İncele</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4"/>
-          </svg>
-        </a>
-        <a href="#hakkimizda" class="btn-ghost">
-          Hikayemiz
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5"/>
-          </svg>
-        </a>
-      </div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      <span class="hero-eyebrow-text">İnegöl, Bursa · Est. 1985</span>
     </div>
-
-    <div class="hero-stats" aria-label="Genel istatistikler">
-      <div class="hero-stat">
-        <div class="hero-stat-num" aria-label="40 yıl">40+</div>
-        <div class="hero-stat-label">Yıllık Deneyim</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num" aria-label="200'den fazla model">200+</div>
-        <div class="hero-stat-label">Model Çeşidi</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num" aria-label="50'den fazla ülke">50+</div>
-        <div class="hero-stat-label">Ülkeye İhracat</div>
-      </div>
-    </div>
-
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="hero-scroll-text">Kaydır</span>
-      <div class="hero-scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-track">
-      <!-- 2x for seamless loop -->
-      <div class="marquee-item"><span class="marquee-dot"></span>Koltuk Takımları</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Yemek Odaları</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>TV Üniteleri</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Berjerler</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Sandalyeler</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Sehpalar</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Özel Üretim</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>İhracat</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Koltuk Takımları</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Yemek Odaları</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>TV Üniteleri</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Berjerler</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Sandalyeler</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Sehpalar</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Özel Üretim</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>İhracat</div>
+    <h1 class="hero-h1">
+      <span class="line"><span>Çünkü,</span></span>
+      <span class="line"><span>sen</span></span>
+      <span class="line"><span><em>değerlisin.</em></span></span>
+    </h1>
+    <p class="hero-sub">
+      Benzersiz tasarımlar. Sanatsal dokunuşlar.<br/>
+      Her parça, yılların zanaatkârlık mirasıyla hayat bulur.
+    </p>
+    <div class="hero-actions">
+      <a href="#koleksiyonlar" class="btn-gold">
+        <span>Koleksiyonları Keşfet</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#hakkimizda" class="btn-text">
+        Hikayemiz
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5"/></svg>
+      </a>
     </div>
   </div>
 
-  <!-- COLLECTIONS -->
-  <section class="collections" id="koleksiyonlar" aria-labelledby="col-title">
-    <div class="container">
-      <div class="collections-header">
-        <div>
-          <span class="section-label reveal">Koleksiyonlar</span>
-          <h2 class="section-title reveal reveal-delay-1" id="col-title">
-            Her Mekâna Özel<br/><em>Tasarımlar</em>
-          </h2>
-        </div>
-        <p class="section-desc reveal reveal-delay-2">
-          İnegöl'ün köklü mobilya geleneğini modern estetikle buluşturan koleksiyonlarımız, yaşam alanlarınıza değer katar.
-        </p>
+  <div class="hero-right" aria-hidden="true">
+    <div class="hero-product-glow"></div>
+    <img class="hero-product-img"
+         src="https://kocakkoltuk.com/wp-content/uploads/2022/09/vic-1.png"
+         alt="Victoria koltuk takımı"
+         width="640"/>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span class="hero-scroll-hint-text">Kaydır</span>
+    <div class="scroll-track"><div class="scroll-fill"></div></div>
+  </div>
+
+  <div class="hero-stats" aria-label="Marka istatistikleri">
+    <div>
+      <div class="hero-stat-n">40+</div>
+      <div class="hero-stat-l">Yıllık Deneyim</div>
+    </div>
+    <div>
+      <div class="hero-stat-n">200+</div>
+      <div class="hero-stat-l">Model Çeşidi</div>
+    </div>
+    <div>
+      <div class="hero-stat-n">50+</div>
+      <div class="hero-stat-l">Ülke İhracat</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-t">
+    <div class="marquee-i"><span class="m-dot"></span>Koltuk Takımları</div>
+    <div class="marquee-i"><span class="m-dot"></span>Yemek Odaları</div>
+    <div class="marquee-i"><span class="m-dot"></span>TV Üniteleri</div>
+    <div class="marquee-i"><span class="m-dot"></span>Berjerler</div>
+    <div class="marquee-i"><span class="m-dot"></span>Sandalyeler</div>
+    <div class="marquee-i"><span class="m-dot"></span>Sehpalar</div>
+    <div class="marquee-i"><span class="m-dot"></span>Özel Üretim</div>
+    <div class="marquee-i"><span class="m-dot"></span>İhracat</div>
+    <div class="marquee-i"><span class="m-dot"></span>İnegöl Kalitesi</div>
+    <div class="marquee-i"><span class="m-dot"></span>Koltuk Takımları</div>
+    <div class="marquee-i"><span class="m-dot"></span>Yemek Odaları</div>
+    <div class="marquee-i"><span class="m-dot"></span>TV Üniteleri</div>
+    <div class="marquee-i"><span class="m-dot"></span>Berjerler</div>
+    <div class="marquee-i"><span class="m-dot"></span>Sandalyeler</div>
+    <div class="marquee-i"><span class="m-dot"></span>Sehpalar</div>
+    <div class="marquee-i"><span class="m-dot"></span>Özel Üretim</div>
+    <div class="marquee-i"><span class="m-dot"></span>İhracat</div>
+    <div class="marquee-i"><span class="m-dot"></span>İnegöl Kalitesi</div>
+  </div>
+</div>
+
+<!-- ═══ COLLECTIONS ════════════════════════════════ -->
+<section class="collections" id="koleksiyonlar" aria-labelledby="col-h">
+  <div class="container">
+    <div class="col-header">
+      <div>
+        <span class="s-label r">Koltuk Takımları</span>
+        <h2 class="s-title r d1" id="col-h">Oturma Odası<br/><em>Koleksiyonu</em></h2>
       </div>
-
-      <div class="collections-grid">
-
-        <article class="col-card col-card-1 reveal" aria-label="Koltuk Takımları koleksiyonu">
-          <div class="col-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&auto=format&fit=crop&q=80"
-              alt="Lüks klasik koltuk takımı"
-              loading="lazy"
-              width="900"
-              height="420"
-            />
-          </div>
-          <div class="col-card-overlay" aria-hidden="true"></div>
-          <div class="col-card-body">
-            <div>
-              <div class="col-card-tag">Oturma Odası</div>
-              <div class="col-card-name">Koltuk Takımları</div>
-            </div>
-            <div class="col-card-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="col-card col-card-2 reveal reveal-delay-1" aria-label="Yemek Odası koleksiyonu">
-          <div class="col-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=700&auto=format&fit=crop&q=80"
-              alt="Klasik yemek odası mobilyası"
-              loading="lazy"
-              width="700"
-              height="420"
-            />
-          </div>
-          <div class="col-card-overlay" aria-hidden="true"></div>
-          <div class="col-card-body">
-            <div>
-              <div class="col-card-tag">Yemek Odası</div>
-              <div class="col-card-name">Yemek Takımları</div>
-            </div>
-            <div class="col-card-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="col-card col-card-3 reveal reveal-delay-1" aria-label="Berjer koleksiyonu">
-          <div class="col-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&auto=format&fit=crop&q=80"
-              alt="Klasik berjer koltuk"
-              loading="lazy"
-              width="600"
-              height="280"
-            />
-          </div>
-          <div class="col-card-overlay" aria-hidden="true"></div>
-          <div class="col-card-body">
-            <div>
-              <div class="col-card-tag">Berjer</div>
-              <div class="col-card-name">Tekli Koltuklar</div>
-            </div>
-            <div class="col-card-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="col-card col-card-4 reveal reveal-delay-2" aria-label="TV Ünitesi koleksiyonu">
-          <div class="col-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=600&auto=format&fit=crop&q=80"
-              alt="Modern TV ünitesi"
-              loading="lazy"
-              width="600"
-              height="280"
-            />
-          </div>
-          <div class="col-card-overlay" aria-hidden="true"></div>
-          <div class="col-card-body">
-            <div>
-              <div class="col-card-tag">Salon</div>
-              <div class="col-card-name">TV Üniteleri</div>
-            </div>
-            <div class="col-card-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="col-card col-card-5 reveal reveal-delay-3" aria-label="Sandalye koleksiyonu">
-          <div class="col-card-img">
-            <img
-              src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&auto=format&fit=crop&q=80"
-              alt="Klasik tasarım sandalye"
-              loading="lazy"
-              width="600"
-              height="280"
-            />
-          </div>
-          <div class="col-card-overlay" aria-hidden="true"></div>
-          <div class="col-card-body">
-            <div>
-              <div class="col-card-tag">Sandalye</div>
-              <div class="col-card-name">Sandalye Koleksiyonu</div>
-            </div>
-            <div class="col-card-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
+      <div class="col-drag-hint r d2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        </svg>
+        Kaydırarak Keşfet
       </div>
     </div>
-  </section>
+  </div>
+  <div class="col-scroll-wrap" id="colScroll" role="list" aria-label="Koltuk takımları">
 
-  <!-- QUOTE -->
-  <section class="quote-section" aria-label="Marka sloganı">
-    <div class="container">
-      <div class="quote-inner">
-        <span class="quote-mark reveal" aria-hidden="true">"</span>
-        <blockquote class="quote-text reveal reveal-delay-1">
-          Her mobilya bir <em>hikaye</em> anlatır.<br/>
-          Biz o hikayeyi, sizin için yazıyoruz.
-        </blockquote>
-        <div class="quote-author-line reveal reveal-delay-2">
-          <span class="quote-line"></span>
-          <span class="quote-author">Koçak Koltuk — İnegöl, Bursa</span>
-          <span class="quote-line"></span>
+    <div class="col-track">
+
+      <!-- Hero product featured large card -->
+      <article class="col-card r" style="width:440px" role="listitem" aria-label="Victoria">
+        <div class="col-card-img" style="height:360px">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/victoria-koltuk-1-white.png"
+               alt="Victoria koltuk takımı" loading="lazy"/>
         </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Victoria</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d1" role="listitem" aria-label="Sultan">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/sultan-1-white.png"
+               alt="Sultan koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Sultan</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d2" role="listitem" aria-label="Venezia">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/venezia-ceviz-1-white.png"
+               alt="Venezia koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Venezia</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d3" role="listitem" aria-label="Paris">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/paris-1-white.png"
+               alt="Paris koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Paris</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d4" role="listitem" aria-label="Napoli">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/napoli-1-white.png"
+               alt="Napoli koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Napoli</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d5" role="listitem" aria-label="Chelsea">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/chelsea-1-white.png"
+               alt="Chelsea koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Chelsea</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r" role="listitem" aria-label="Hurrem">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/hurrem-1-white.png"
+               alt="Hurrem koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Hürrem</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d1" role="listitem" aria-label="Helen">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/helen-1-white.png"
+               alt="Helen koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Helen</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d2" role="listitem" aria-label="Haroum">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/haroum-white.png"
+               alt="Haroum koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Haroum</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d3" role="listitem" aria-label="Emirgan">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/emirgan-1-white.png"
+               alt="Emirgan koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Emirgan</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d4" role="listitem" aria-label="Yakamoz">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/yakamoz-koltuk-1-white.png"
+               alt="Yakamoz koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Yakamoz</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d5" role="listitem" aria-label="Yıldız">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/yildiz-sag-1-white.png"
+               alt="Yıldız koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Yıldız</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r" role="listitem" aria-label="Braga">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/braga-1-white.png"
+               alt="Braga koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Braga</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d1" role="listitem" aria-label="Filiz">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/filiz-1-white.png"
+               alt="Filiz koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Filiz</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="col-card r d2" role="listitem" aria-label="Sudenaz">
+        <div class="col-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/sudenaz-1-white.png"
+               alt="Sudenaz koltuk takımı" loading="lazy"/>
+        </div>
+        <div class="col-card-body">
+          <div>
+            <div class="col-card-tag">Koltuk Takımı</div>
+            <div class="col-card-name">Sudenaz</div>
+          </div>
+          <div class="col-card-btn" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DINING + TV SHOWCASE ══════════════════════ -->
+<section class="showcase" aria-labelledby="sc-h">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-bottom:5rem;align-items:end;flex-wrap:wrap" class="r">
+      <div>
+        <span class="s-label">Yemek Odası</span>
+        <h2 class="s-title" id="sc-h">Sofranıza<br/><em>Zarafet Katın</em></h2>
+      </div>
+      <p style="font-family:var(--ff2);font-size:1.0625rem;font-style:italic;color:var(--muted);line-height:1.85;max-width:440px" class="r d2">
+        İnegöl'ün en ince işçiliğiyle hayat bulan yemek odası ve TV ünitesi koleksiyonlarımız, evinizin her köşesine karakter katar.
+      </p>
+    </div>
+
+    <div class="showcase-grid">
+      <article class="sc-card r" aria-label="Sudenaz yemek odası">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/sudenaz-yemek-1-white.png"
+               alt="Sudenaz yemek odası takımı" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">Yemek Odası</div>
+          <div class="sc-card-name">Sudenaz</div>
+        </div>
+      </article>
+
+      <article class="sc-card r d1" aria-label="Victoria yemek odası">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/victoria-yemek-1-white.png"
+               alt="Victoria yemek odası takımı" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">Yemek Odası</div>
+          <div class="sc-card-name">Victoria</div>
+        </div>
+      </article>
+
+      <article class="sc-card r d2" aria-label="Yakamoz yemek odası">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/yakamoz-yemek-2-1-white.png"
+               alt="Yakamoz yemek odası takımı" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">Yemek Odası</div>
+          <div class="sc-card-name">Yakamoz</div>
+        </div>
+      </article>
+
+      <article class="sc-card r d1" aria-label="TV Ünitesi 1">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/1-yeni.png"
+               alt="TV Ünitesi Model 1" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">TV Ünitesi</div>
+          <div class="sc-card-name">Klasik Seri I</div>
+        </div>
+      </article>
+
+      <article class="sc-card r d2" aria-label="TV Ünitesi 2">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/2-yeni.png"
+               alt="TV Ünitesi Model 2" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">TV Ünitesi</div>
+          <div class="sc-card-name">Klasik Seri II</div>
+        </div>
+      </article>
+
+      <article class="sc-card r d3" aria-label="TV Ünitesi 3">
+        <div class="sc-card-img">
+          <img src="https://kocakkoltuk.com/wp-content/uploads/2022/10/3-yeni.png"
+               alt="TV Ünitesi Model 3" loading="lazy"/>
+        </div>
+        <div class="sc-card-body">
+          <div class="sc-card-cat">TV Ünitesi</div>
+          <div class="sc-card-name">Klasik Seri III</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PULLQUOTE ═════════════════════════════════ -->
+<section class="pullquote" aria-label="Marka sözü">
+  <div class="container">
+    <div class="pq-inner">
+      <span class="pq-mark r" aria-hidden="true">"</span>
+      <blockquote class="pq-text r d1">
+        Her mobilya bir <em>hikaye</em> anlatır.<br/>
+        Biz o hikayeyi sizin için<br/><em>yazıyoruz.</em>
+      </blockquote>
+      <div class="pq-rule r d2">
+        <span class="pq-line"></span>
+        <span class="pq-auth">Koçak Koltuk — İnegöl, Bursa</span>
+        <span class="pq-line"></span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CRAFTSMANSHIP -->
-  <section class="craft" id="hakkimizda" aria-labelledby="craft-title">
-    <div class="container">
-      <div class="craft-inner">
+<!-- ═══ ABOUT ══════════════════════════════════════ -->
+<section class="about" id="hakkimizda" aria-labelledby="ab-h">
+  <div class="container">
+    <div class="about-inner">
 
-        <div class="craft-visual reveal-left">
-          <img
-            class="craft-img-main"
-            src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=700&auto=format&fit=crop&q=80"
-            alt="Mobilya atölyesinde zanaatkâr çalışıyor"
-            loading="lazy"
-            width="700"
-          />
-          <img
-            class="craft-img-accent"
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&auto=format&fit=crop&q=80"
-            alt="Detaylı işçilik"
-            loading="lazy"
-            width="400"
-          />
-          <div class="craft-badge">
-            <div class="craft-badge-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F0F0E" stroke-width="2">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="craft-badge-num">40+</div>
-              <div class="craft-badge-label">Yıllık Deneyim</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="craft-text reveal-right">
-          <span class="section-label">Hakkımızda</span>
-          <h2 class="craft-title" id="craft-title">
-            İnegöl'ün<br/><em>Zanaatkâr</em> Ruhu
-          </h2>
-          <p class="craft-body">
-            40 yılı aşkın süredir İnegöl'ün mobilya geleneğini yaşatıyor, onu geleceğe taşıyoruz. Her ürün; seçkin hammaddeler, deneyimli eller ve titiz işçilikle hayat bulur.
-          </p>
-          <div class="craft-features">
-            <div class="craft-feature">
-              <div class="craft-feature-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="craft-feature-title">Kalite Güvencesi</div>
-                <div class="craft-feature-desc">Her ürün titiz kalite kontrolünden geçer</div>
-              </div>
-            </div>
-            <div class="craft-feature">
-              <div class="craft-feature-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="craft-feature-title">Küresel İhracat</div>
-                <div class="craft-feature-desc">50+ ülkeye ihracat yapan markamız</div>
-              </div>
-            </div>
-            <div class="craft-feature">
-              <div class="craft-feature-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="craft-feature-title">El İşçiliği</div>
-                <div class="craft-feature-desc">Ustalıkla işlenmiş sanatsal detaylar</div>
-              </div>
-            </div>
-            <div class="craft-feature">
-              <div class="craft-feature-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="craft-feature-title">Özel Tasarım</div>
-                <div class="craft-feature-desc">Hayalinizdeki mobilyayı birlikte tasarlayalım</div>
-              </div>
-            </div>
-          </div>
-          <a href="#iletisim" class="btn-primary" style="display:inline-flex;">
-            <span>Bize Ulaşın</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
+      <div class="about-visual rl">
+        <img class="about-main-img"
+             src="https://kocakkoltuk.com/wp-content/uploads/2022/09/content-1.png"
+             alt="Koçak Koltuk showroom" loading="lazy"/>
+        <img class="about-accent-img"
+             src="https://kocakkoltuk.com/wp-content/uploads/2022/09/yemek-detay.png"
+             alt="Yemek odası detay" loading="lazy"/>
+        <div class="about-badge">
+          <div class="about-badge-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#07060A" stroke-width="2">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
             </svg>
+          </div>
+          <div>
+            <div class="about-badge-n">40+</div>
+            <div class="about-badge-l">Yıllık Deneyim</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text rr">
+        <span class="s-label">Hakkımızda</span>
+        <h2 class="about-title" id="ab-h">
+          İnegöl'ün<br/><em>Zanaatkâr</em><br/>Ruhu
+        </h2>
+        <p class="about-body">
+          1985'ten bu yana İnegöl'ün derin mobilya kültürünü yaşatıyor, her tasarımda ona yeni bir soluk katıyoruz. Her ürün; özenle seçilmiş hammaddeler, deneyimli ustalar ve titiz işçilikle hayat bulur.
+        </p>
+        <div class="about-feats">
+          <div class="af">
+            <div class="af-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="af-t">Kalite Güvencesi</div>
+              <div class="af-d">Her ürün titiz kalite kontrolünden geçer</div>
+            </div>
+          </div>
+          <div class="af">
+            <div class="af-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="af-t">Küresel İhracat</div>
+              <div class="af-d">50+ ülkeye ihracat yapan bir marka</div>
+            </div>
+          </div>
+          <div class="af">
+            <div class="af-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div>
+              <div class="af-t">El İşçiliği</div>
+              <div class="af-d">Ustaca işlenmiş sanatsal detaylar</div>
+            </div>
+          </div>
+          <div class="af">
+            <div class="af-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div>
+              <div class="af-t">Özel Tasarım</div>
+              <div class="af-d">Hayalinizdeki mobilyayı birlikte yapalım</div>
+            </div>
+          </div>
+        </div>
+        <a href="#iletisim" class="btn-gold" style="display:inline-flex">
+          <span>Bize Ulaşın</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ════════════════════════════════════ -->
+<section class="contact" id="iletisim" aria-labelledby="ct-h">
+  <div class="container">
+    <div style="margin-bottom:4rem">
+      <span class="s-label r">İletişim</span>
+      <h2 class="s-title r d1" id="ct-h">Showroom'umuzu<br/><em>Ziyaret Edin</em></h2>
+    </div>
+    <div class="contact-inner">
+
+      <div class="rl">
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Adres</div>
+            <div class="c-val">Yeni Sanayi Ertuğrul Gazi Cad. No.103<br/>İnegöl / Bursa, Türkiye</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1A16 16 0 0 0 15.9 16.1l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Telefon</div>
+            <div class="c-val"><a href="tel:+902247160330">0 (224) 716 03 30</a></div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="c-label">E-posta</div>
+            <div class="c-val"><a href="mailto:info@kocakkoltuk.com">info@kocakkoltuk.com</a></div>
+          </div>
+        </div>
+        <div class="c-detail" style="border-bottom:none">
+          <div class="c-icon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Çalışma Saatleri</div>
+            <div class="c-val">Hafta içi: 08:00 – 18:00<br/>Cumartesi: 09:00 – 17:00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap rr">
+        <div class="form-title">Teklif İsteyin</div>
+        <div class="form-sub">En kısa sürede size geri dönüyoruz.</div>
+        <form id="form" novalidate>
+          <div class="fg-row">
+            <div class="fg">
+              <label class="fl" for="fn">Ad</label>
+              <input type="text" id="fn" name="fn" class="fi" placeholder="Adınız" autocomplete="given-name" required/>
+            </div>
+            <div class="fg">
+              <label class="fl" for="ln">Soyad</label>
+              <input type="text" id="ln" name="ln" class="fi" placeholder="Soyadınız" autocomplete="family-name" required/>
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl" for="em">E-posta</label>
+            <input type="email" id="em" name="em" class="fi" placeholder="eposta@ornek.com" autocomplete="email" required/>
+          </div>
+          <div class="fg">
+            <label class="fl" for="ph">Telefon</label>
+            <input type="tel" id="ph" name="ph" class="fi" placeholder="05xx xxx xx xx" autocomplete="tel"/>
+          </div>
+          <div class="fg">
+            <label class="fl" for="msg">Mesajınız</label>
+            <textarea id="msg" name="msg" class="ft" placeholder="İlgilendiğiniz ürün ve mekânınızı kısaca anlatın…" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="sbtn">Gönder</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">Koçak <span>Koltuk</span></div>
+        <div class="f-tagline">"Çünkü, sen değerlisin."</div>
+        <div class="f-social" aria-label="Sosyal medya">
+          <a href="#" class="f-soc" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="f-soc" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="f-soc" aria-label="YouTube">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
           </a>
         </div>
-
+      </div>
+      <div>
+        <div class="f-col-t">Koleksiyonlar</div>
+        <ul class="f-links" role="list">
+          <li><a href="#koleksiyonlar">Koltuk Takımları</a></li>
+          <li><a href="#koleksiyonlar">Yemek Odaları</a></li>
+          <li><a href="#koleksiyonlar">TV Üniteleri</a></li>
+          <li><a href="#koleksiyonlar">Berjerler</a></li>
+          <li><a href="#koleksiyonlar">Sandalyeler</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-t">Kurumsal</div>
+        <ul class="f-links" role="list">
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#iletisim">Showroom</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+          <li><a href="https://kocakkoltuk.com/wp-content/uploads/2023/04/kocak-koltuk-katalog.pdf" target="_blank" rel="noopener">E-Katalog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-t">İletişim</div>
+        <ul class="f-links" role="list">
+          <li><a href="tel:+902247160330">0 (224) 716 03 30</a></li>
+          <li><a href="mailto:info@kocakkoltuk.com">info@kocakkoltuk.com</a></li>
+          <li style="color:var(--muted);font-size:.875rem;line-height:1.65">İnegöl / Bursa, Türkiye</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="iletisim" aria-labelledby="contact-title">
-    <div class="container">
-      <div style="margin-bottom: 4rem;">
-        <span class="section-label reveal">İletişim</span>
-        <h2 class="section-title reveal reveal-delay-1" id="contact-title">
-          Showroom'umuzu<br/><em>Ziyaret Edin</em>
-        </h2>
-      </div>
-
-      <div class="contact-inner">
-        <div class="contact-info reveal-left">
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-detail-label">Adres</div>
-              <div class="contact-detail-value">
-                Yeni Sanayi Ertuğrul Gazi Cad. No.103<br/>
-                İnegöl / Bursa, Türkiye
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1A16 16 0 0 0 15.9 16.1l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-detail-label">Telefon</div>
-              <div class="contact-detail-value">
-                <a href="tel:+902247160330" style="transition: color 200ms ease;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--cream)'">
-                  0 (224) 716 03 30
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-detail-label">E-posta</div>
-              <div class="contact-detail-value">
-                <a href="mailto:info@kocakkoltuk.com" style="transition: color 200ms ease;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--cream)'">
-                  info@kocakkoltuk.com
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-detail" style="border-bottom: none;">
-            <div class="contact-detail-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-detail-label">Çalışma Saatleri</div>
-              <div class="contact-detail-value">
-                Hafta içi: 08:00 – 18:00<br/>
-                Cumartesi: 09:00 – 17:00
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="contact-form-wrap reveal-right">
-          <div class="form-title">Teklif İsteyin</div>
-          <div class="form-sub">En kısa sürede size geri dönüyoruz.</div>
-          <form id="contactForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="firstName">Ad</label>
-                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Adınız" autocomplete="given-name" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="lastName">Soyad</label>
-                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Soyadınız" autocomplete="family-name" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="email">E-posta</label>
-              <input type="email" id="email" name="email" class="form-input" placeholder="eposta@ornek.com" autocomplete="email" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="phone">Telefon</label>
-              <input type="tel" id="phone" name="phone" class="form-input" placeholder="05xx xxx xx xx" autocomplete="tel" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="message">Mesajınız</label>
-              <textarea id="message" name="message" class="form-textarea" placeholder="İlgilendiğiniz ürünleri ve mekânınızı kısaca anlatın…" required></textarea>
-            </div>
-            <button type="submit" class="btn-submit" id="submitBtn">Gönder</button>
-          </form>
-        </div>
-
-      </div>
+    <div class="f-bottom">
+      <p class="f-copy">© 2025 Koçak Koltuk. Tüm hakları saklıdır.</p>
+      <nav class="f-legal" aria-label="Yasal bağlantılar">
+        <a href="#">Gizlilik Politikası</a>
+        <a href="#">Çerez Politikası</a>
+      </nav>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- FOOTER -->
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <div class="footer-brand-name">Koçak <span>Koltuk</span></div>
-          <div class="footer-tagline">"Çünkü, sen değerlisin."</div>
-          <div class="footer-social" aria-label="Sosyal medya">
-            <a href="#" class="footer-social-link" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-            <a href="#" class="footer-social-link" aria-label="Facebook">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
-            </a>
-            <a href="#" class="footer-social-link" aria-label="YouTube">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Koleksiyonlar</div>
-          <ul class="footer-links" role="list">
-            <li><a href="#koleksiyonlar">Koltuk Takımları</a></li>
-            <li><a href="#koleksiyonlar">Yemek Odaları</a></li>
-            <li><a href="#koleksiyonlar">TV Üniteleri</a></li>
-            <li><a href="#koleksiyonlar">Berjerler</a></li>
-            <li><a href="#koleksiyonlar">Sandalyeler</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Kurumsal</div>
-          <ul class="footer-links" role="list">
-            <li><a href="#hakkimizda">Hakkımızda</a></li>
-            <li><a href="#iletisim">Showroom</a></li>
-            <li><a href="#iletisim">İletişim</a></li>
-            <li><a href="#">E-Katalog</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">İletişim</div>
-          <ul class="footer-links" role="list">
-            <li><a href="tel:+902247160330">0 (224) 716 03 30</a></li>
-            <li><a href="mailto:info@kocakkoltuk.com">info@kocakkoltuk.com</a></li>
-            <li style="color:var(--muted); font-size:.875rem; line-height:1.6;">İnegöl / Bursa,<br/>Türkiye</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Koçak Koltuk. Tüm hakları saklıdır.</p>
-        <nav class="footer-legal" aria-label="Yasal">
-          <a href="#">Gizlilik Politikası</a>
-          <a href="#">Çerez Politikası</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+<script>
+/* ── CURSOR ───────────────────────────────────── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.col-card,.sc-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+});
 
-  <script>
-    /* ── LOADER ───────────────────────────────────── */
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
-      }, 1400);
+/* ── LOADER ───────────────────────────────────── */
+let pct=0;
+const pctEl=document.getElementById('loaderPct');
+const pctInt=setInterval(()=>{
+  pct=Math.min(pct+(Math.random()*12+4),100);
+  pctEl.textContent=Math.round(pct)+'%';
+  if(pct>=100)clearInterval(pctInt);
+},80);
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('loader').classList.add('out'),1600);
+});
+
+/* ── NAV ──────────────────────────────────────── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>80),{passive:true});
+
+/* ── HAMBURGER ────────────────────────────────── */
+const burger=document.getElementById('burger');
+const mob=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{
+  const open=mob.classList.toggle('open');
+  burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+  document.body.style.overflow=open?'hidden':'';
+});
+function closeMob(){
+  mob.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+
+/* ── SCROLL REVEAL ────────────────────────────── */
+if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}
     });
+  },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.r,.rl,.rr').forEach(el=>io.observe(el));
+}else{
+  document.querySelectorAll('.r,.rl,.rr').forEach(el=>el.classList.add('v'));
+}
 
-    /* ── NAV SCROLL ───────────────────────────────── */
-    const nav = document.getElementById('mainNav');
-    const onScroll = () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+/* ── DRAG TO SCROLL ───────────────────────────── */
+const scroller=document.getElementById('colScroll');
+let isDown=false,startX,scrollLeft;
+scroller.addEventListener('mousedown',e=>{
+  isDown=true;scroller.classList.add('active');
+  startX=e.pageX-scroller.offsetLeft;
+  scrollLeft=scroller.scrollLeft;
+});
+scroller.addEventListener('mouseleave',()=>{isDown=false});
+scroller.addEventListener('mouseup',()=>{isDown=false});
+scroller.addEventListener('mousemove',e=>{
+  if(!isDown)return;
+  e.preventDefault();
+  const x=e.pageX-scroller.offsetLeft;
+  scroller.scrollLeft=scrollLeft-(x-startX)*1.2;
+});
 
-    /* ── HAMBURGER ────────────────────────────────── */
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileClose = document.getElementById('mobileClose');
+/* ── ANCHOR SCROLL ────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(!t)return;
+    e.preventDefault();
+    window.scrollTo({top:t.getBoundingClientRect().top+scrollY-88,behavior:'smooth'});
+  });
+});
 
-    hamburger.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-
-    function closeMobile() {
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-    mobileClose.addEventListener('click', closeMobile);
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMobile();
-    });
-
-    /* ── SCROLL REVEAL ────────────────────────────── */
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!prefersReduced) {
-      const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-      revealEls.forEach(el => io.observe(el));
-    } else {
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
-        el.classList.add('visible');
-      });
-    }
-
-    /* ── FORM ─────────────────────────────────────── */
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Gönderiliyor…';
-
-      setTimeout(() => {
-        submitBtn.textContent = 'Mesajınız İletildi ✓';
-        submitBtn.style.background = 'var(--gold-dk)';
-        form.reset();
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Gönder';
-          submitBtn.style.background = '';
-        }, 3500);
-      }, 1200);
-    });
-
-    /* ── SMOOTH ANCHOR SCROLL ─────────────────────── */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', (e) => {
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        const offset = 100;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      });
-    });
-  </script>
-
+/* ── FORM ─────────────────────────────────────── */
+const form=document.getElementById('form');
+const sbtn=document.getElementById('sbtn');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  sbtn.disabled=true;
+  sbtn.textContent='Gönderiliyor…';
+  setTimeout(()=>{
+    sbtn.textContent='Mesajınız İletildi ✓';
+    sbtn.style.background='var(--gold3)';
+    form.reset();
+    setTimeout(()=>{
+      sbtn.disabled=false;
+      sbtn.textContent='Gönder';
+      sbtn.style.background='';
+    },3500);
+  },1200);
+});
+</script>
 </body>
 </html>
